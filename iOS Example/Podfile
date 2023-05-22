@@ -1,0 +1,15 @@
+# Uncomment the next line to define a global platform for your project
+platform :ios, '11.0'
+workspace 'iOS Example.xcworkspace'
+
+if File::exists?("../Popup")
+target 'Popup' do
+  project '../Popup/Popup.xcodeproj'
+  pod 'SnapKit'
+end
+end
+
+target 'iOS Example' do
+  use_frameworks!
+  pod 'SnapKit'
+end
