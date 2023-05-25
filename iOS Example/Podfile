@@ -5,11 +5,12 @@ workspace 'iOS Example.xcworkspace'
 if File::exists?("../Popup")
 target 'Popup' do
   project '../Popup/Popup.xcodeproj'
-  pod 'SnapKit'
+  # pod 'SnapKit'
 end
 end
 
 target 'iOS Example' do
   use_frameworks!
   pod 'SnapKit'
+  pod 'IQKeyboardManagerSwift'
 end

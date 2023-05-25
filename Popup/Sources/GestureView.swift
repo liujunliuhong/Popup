@@ -1,13 +1,13 @@
 //
-//  ContentGestureView.swift
+//  GestureView.swift
 //  Popup
 //
-//  Created by dfsx6 on 2023/5/24.
+//  Created by dfsx6 on 2023/5/25.
 //
 
 import UIKit
 
-internal final class ContentGestureView: UIView {
+internal final class GestureView: UIView {
 
     internal var tapClosure: (() -> Void)?
     

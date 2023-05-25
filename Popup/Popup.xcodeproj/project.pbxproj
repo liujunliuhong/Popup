@@ -8,11 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		D139286A2A1DDE0F008652C7 /* Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13928692A1DDE0F008652C7 /* Info.swift */; };
-		D139286C2A1DE00C008652C7 /* UIWindow+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D139286B2A1DE00C008652C7 /* UIWindow+Extension.swift */; };
-		D13928702A1DED53008652C7 /* ContentGestureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D139286F2A1DED53008652C7 /* ContentGestureView.swift */; };
 		D13928742A1DF291008652C7 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13928732A1DF291008652C7 /* UIView+Extension.swift */; };
 		D13928782A1DF436008652C7 /* ViewPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13928772A1DF436008652C7 /* ViewPosition.swift */; };
 		D13928872A1E1311008652C7 /* AnimationProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13928862A1E1311008652C7 /* AnimationProperty.swift */; };
+		D13F341E2A1EFBEF007637AA /* BackgroundTouchConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13F341D2A1EFBEF007637AA /* BackgroundTouchConfiguration.swift */; };
+		D13F34242A1F4721007637AA /* GestureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13F34232A1F4721007637AA /* GestureView.swift */; };
+		D13F34262A1F49AF007637AA /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13F34252A1F49AF007637AA /* BackgroundView.swift */; };
+		D13F34282A1F49D4007637AA /* DimmedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13F34272A1F49D4007637AA /* DimmedView.swift */; };
 		D19B941D2A1B3D5200FC46DD /* Popup.h in Headers */ = {isa = PBXBuildFile; fileRef = D19B941C2A1B3D5200FC46DD /* Popup.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D19B942C2A1B402B00FC46DD /* Popup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19B942B2A1B402B00FC46DD /* Popup.swift */; };
 		FA7FD2831C69C4757AFBDA86 /* libPods-Popup.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 13F1D2DE92D1EBDE84301F88 /* libPods-Popup.a */; };
@@ -23,11 +25,13 @@
 		89E13FB574CDBC876474FF5A /* Pods-Popup.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Popup.release.xcconfig"; path = "Target Support Files/Pods-Popup/Pods-Popup.release.xcconfig"; sourceTree = "<group>"; };
 		B3B610359EA89E13F8EABF1B /* Pods-Popup.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Popup.debug.xcconfig"; path = "Target Support Files/Pods-Popup/Pods-Popup.debug.xcconfig"; sourceTree = "<group>"; };
 		D13928692A1DDE0F008652C7 /* Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Info.swift; sourceTree = "<group>"; };
-		D139286B2A1DE00C008652C7 /* UIWindow+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+Extension.swift"; sourceTree = "<group>"; };
-		D139286F2A1DED53008652C7 /* ContentGestureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentGestureView.swift; sourceTree = "<group>"; };
 		D13928732A1DF291008652C7 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		D13928772A1DF436008652C7 /* ViewPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewPosition.swift; sourceTree = "<group>"; };
 		D13928862A1E1311008652C7 /* AnimationProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationProperty.swift; sourceTree = "<group>"; };
+		D13F341D2A1EFBEF007637AA /* BackgroundTouchConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundTouchConfiguration.swift; sourceTree = "<group>"; };
+		D13F34232A1F4721007637AA /* GestureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureView.swift; sourceTree = "<group>"; };
+		D13F34252A1F49AF007637AA /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
+		D13F34272A1F49D4007637AA /* DimmedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DimmedView.swift; sourceTree = "<group>"; };
 		D19B94192A1B3D5200FC46DD /* Popup.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Popup.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D19B941C2A1B3D5200FC46DD /* Popup.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Popup.h; sourceTree = "<group>"; };
 		D19B942B2A1B402B00FC46DD /* Popup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Popup.swift; sourceTree = "<group>"; };
@@ -94,12 +98,14 @@
 			isa = PBXGroup;
 			children = (
 				D19B942B2A1B402B00FC46DD /* Popup.swift */,
-				D139286B2A1DE00C008652C7 /* UIWindow+Extension.swift */,
 				D13928732A1DF291008652C7 /* UIView+Extension.swift */,
-				D139286F2A1DED53008652C7 /* ContentGestureView.swift */,
-				D13928862A1E1311008652C7 /* AnimationProperty.swift */,
 				D13928692A1DDE0F008652C7 /* Info.swift */,
+				D13928862A1E1311008652C7 /* AnimationProperty.swift */,
 				D13928772A1DF436008652C7 /* ViewPosition.swift */,
+				D13F341D2A1EFBEF007637AA /* BackgroundTouchConfiguration.swift */,
+				D13F34232A1F4721007637AA /* GestureView.swift */,
+				D13F34252A1F49AF007637AA /* BackgroundView.swift */,
+				D13F34272A1F49D4007637AA /* DimmedView.swift */,
 			);
 			path = Sources;
 			sourceTree = SOURCE_ROOT;
@@ -210,12 +216,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D13F341E2A1EFBEF007637AA /* BackgroundTouchConfiguration.swift in Sources */,
 				D13928872A1E1311008652C7 /* AnimationProperty.swift in Sources */,
+				D13F34262A1F49AF007637AA /* BackgroundView.swift in Sources */,
 				D13928742A1DF291008652C7 /* UIView+Extension.swift in Sources */,
-				D13928702A1DED53008652C7 /* ContentGestureView.swift in Sources */,
 				D139286A2A1DDE0F008652C7 /* Info.swift in Sources */,
-				D139286C2A1DE00C008652C7 /* UIWindow+Extension.swift in Sources */,
 				D19B942C2A1B402B00FC46DD /* Popup.swift in Sources */,
+				D13F34282A1F49D4007637AA /* DimmedView.swift in Sources */,
+				D13F34242A1F4721007637AA /* GestureView.swift in Sources */,
 				D13928782A1DF436008652C7 /* ViewPosition.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

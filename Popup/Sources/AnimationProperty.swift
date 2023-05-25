@@ -9,14 +9,17 @@ import Foundation
 import UIKit
 
 public struct AnimationProperty {
+    public let animation: Bool
     public let duration: TimeInterval
     public let options: UIView.AnimationOptions
     
-    public init(duration: TimeInterval = Popup.defaultAnimationDuration,
+    public init(animation: Bool,
+                duration: TimeInterval = Popup.defaultAnimationDuration,
                 options: UIView.AnimationOptions = Popup.defaultAnimationOptions) {
+        self.animation = animation
         self.duration = duration
         self.options = options
     }
     
-    public static let `default` = AnimationProperty()
+    public static let `default` = AnimationProperty(animation: true)
 }

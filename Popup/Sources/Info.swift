@@ -10,9 +10,12 @@ import UIKit
 
 internal final class Info {
     internal let groupKey: String
+    
     internal let mainPopView: UIView
+    
     internal let backgroundView: UIView
-    internal let contentView: ContentGestureView
+    internal let dimmedView: UIView
+    internal let gestureView: GestureView
     
     internal var otherPopViews: [UIView] = []
     
@@ -26,10 +29,12 @@ internal final class Info {
     internal init(groupKey: String,
                   mainPopView: UIView,
                   backgroundView: UIView,
-                  contentView: ContentGestureView) {
+                  dimmedView: UIView,
+                  gestureView: GestureView) {
         self.groupKey = groupKey
         self.mainPopView = mainPopView
         self.backgroundView = backgroundView
-        self.contentView = contentView
+        self.dimmedView = dimmedView
+        self.gestureView = gestureView
     }
 }

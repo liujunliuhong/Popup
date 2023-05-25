@@ -7,11 +7,8 @@
 
 import Foundation
 import UIKit
-import SnapKit
-
 
 public typealias PopViewConstraintClosure = (_ popView: UIView) -> (Void)
-
 
 public final class Popup {
     public static let defaultAnimationDuration: TimeInterval = 0.25
@@ -21,81 +18,172 @@ public final class Popup {
 }
 
 extension Popup {
-    private static func getWindow() -> UIWindow? {
-        if let window = UIApplication.shared.delegate?.window {
-            return window
-        }
-        return nil
-    }
-}
-
-extension Popup {
     public static func show(groupKey: String,
                             popView: UIView,
                             dimmedMaskAlpha: CGFloat = Popup.defaultDimmedMaskAlpha,
-                            animation: Bool = true,
                             animationProperty: AnimationProperty = .default,
-                            shouldDismissOnBackgroundTouch: Bool = true,
-                            backgroundTouchDismissAnimationProperty: AnimationProperty = .default,
+                            backgroundTouchConfiguration: BackgroundTouchConfiguration = .default,
                             initialConstraintClosure: @escaping PopViewConstraintClosure,
                             destinationConstraintClosure: @escaping PopViewConstraintClosure,
                             dismissConstraintClosure: @escaping PopViewConstraintClosure,
                             completion: (() -> Void)? = nil) {
         
-        guard let window = Popup.getWindow() else { return }
+        guard let rootView = Popup.getRootViewController()?.view else { return }
         
         // backgroundView
-        let backgroundView = UIView()
-        window.addSubview(backgroundView)
-        backgroundView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
+        let backgroundView = BackgroundView()
+        backgroundView.translatesAutoresizingMaskIntoConstraints = false
+        rootView.addSubview(backgroundView)
         
-        // contentView
-        let contentView = ContentGestureView()
-        window.addSubview(contentView)
-        contentView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
+        let backgroundLeftConstraint = NSLayoutConstraint(item: backgroundView,
+                                                          attribute: .left,
+                                                          relatedBy: .equal,
+                                                          toItem: rootView,
+                                                          attribute: .left,
+                                                          multiplier: 1.0,
+                                                          constant: 0)
+        let backgroundTopConstraint = NSLayoutConstraint(item: backgroundView,
+                                                         attribute: .top,
+                                                         relatedBy: .equal,
+                                                         toItem: rootView,
+                                                         attribute: .top,
+                                                         multiplier: 1.0,
+                                                         constant: 0)
+        let backgroundRightConstraint = NSLayoutConstraint(item: backgroundView,
+                                                           attribute: .right,
+                                                           relatedBy: .equal,
+                                                           toItem: rootView,
+                                                           attribute: .right,
+                                                           multiplier: 1.0,
+                                                           constant: 0)
+        let backgroundBottomConstraint = NSLayoutConstraint(item: backgroundView,
+                                                            attribute: .bottom,
+                                                            relatedBy: .equal,
+                                                            toItem: rootView,
+                                                            attribute: .bottom,
+                                                            multiplier: 1.0,
+                                                            constant: 0)
+        rootView.addConstraints([backgroundLeftConstraint,
+                                 backgroundTopConstraint,
+                                 backgroundRightConstraint,
+                                 backgroundBottomConstraint])
         
-        if shouldDismissOnBackgroundTouch {
-            contentView.tapClosure = {
+        rootView.setNeedsLayout()
+        rootView.layoutIfNeeded()
+        
+        // dimmedView
+        let dimmedView = DimmedView()
+        dimmedView.translatesAutoresizingMaskIntoConstraints = false
+        backgroundView.addSubview(dimmedView)
+        
+        let dimmedLeftConstraint = NSLayoutConstraint(item: dimmedView,
+                                                      attribute: .left,
+                                                      relatedBy: .equal,
+                                                      toItem: backgroundView,
+                                                      attribute: .left,
+                                                      multiplier: 1.0,
+                                                      constant: 0)
+        let dimmedTopConstraint = NSLayoutConstraint(item: dimmedView,
+                                                     attribute: .top,
+                                                     relatedBy: .equal,
+                                                     toItem: backgroundView,
+                                                     attribute: .top,
+                                                     multiplier: 1.0,
+                                                     constant: 0)
+        let dimmedRightConstraint = NSLayoutConstraint(item: dimmedView,
+                                                       attribute: .right,
+                                                       relatedBy: .equal,
+                                                       toItem: backgroundView,
+                                                       attribute: .right,
+                                                       multiplier: 1.0,
+                                                       constant: 0)
+        let dimmedBottomConstraint = NSLayoutConstraint(item: dimmedView,
+                                                        attribute: .bottom,
+                                                        relatedBy: .equal,
+                                                        toItem: backgroundView,
+                                                        attribute: .bottom,
+                                                        multiplier: 1.0,
+                                                        constant: 0)
+        backgroundView.addConstraints([dimmedLeftConstraint,
+                                       dimmedTopConstraint,
+                                       dimmedRightConstraint,
+                                       dimmedBottomConstraint])
+        
+        // gestureView
+        let gestureView = GestureView()
+        gestureView.translatesAutoresizingMaskIntoConstraints = false
+        backgroundView.addSubview(gestureView)
+        
+        let gestureViewLeftConstraint = NSLayoutConstraint(item: gestureView,
+                                                           attribute: .left,
+                                                           relatedBy: .equal,
+                                                           toItem: backgroundView,
+                                                           attribute: .left,
+                                                           multiplier: 1.0,
+                                                           constant: 0)
+        let gestureViewTopConstraint = NSLayoutConstraint(item: gestureView,
+                                                          attribute: .top,
+                                                          relatedBy: .equal,
+                                                          toItem: backgroundView,
+                                                          attribute: .top,
+                                                          multiplier: 1.0,
+                                                          constant: 0)
+        let gestureViewRightConstraint = NSLayoutConstraint(item: gestureView,
+                                                            attribute: .right,
+                                                            relatedBy: .equal,
+                                                            toItem: backgroundView,
+                                                            attribute: .right,
+                                                            multiplier: 1.0,
+                                                            constant: 0)
+        let gestureViewBottomConstraint = NSLayoutConstraint(item: gestureView,
+                                                             attribute: .bottom,
+                                                             relatedBy: .equal,
+                                                             toItem: backgroundView,
+                                                             attribute: .bottom,
+                                                             multiplier: 1.0,
+                                                             constant: 0)
+        backgroundView.addConstraints([gestureViewLeftConstraint,
+                                       gestureViewTopConstraint,
+                                       gestureViewRightConstraint,
+                                       gestureViewBottomConstraint])
+        
+        backgroundView.setNeedsLayout()
+        backgroundView.layoutIfNeeded()
+        
+        if backgroundTouchConfiguration.enable {
+            gestureView.tapClosure = {
                 Popup.dismiss(groupKey: groupKey,
-                              animation: true,
-                              animationProperty: backgroundTouchDismissAnimationProperty,
-                              completion: nil)
+                              animationProperty: backgroundTouchConfiguration.animationProperty,
+                              completion: backgroundTouchConfiguration.dismissClosure)
             }
         }
         
         // add popView
-        window.addSubview(popView)
-        
-        window.setNeedsLayout()
-        window.layoutIfNeeded()
+        backgroundView.addSubview(popView)
         
         //
-        if animation {
-            contentView.backgroundColor = Popup.defaultDimmedMaskColor.withAlphaComponent(0)
+        if animationProperty.animation {
+            dimmedView.backgroundColor = Popup.defaultDimmedMaskColor.withAlphaComponent(0)
             
             initialConstraintClosure(popView)
             
-            window.setNeedsLayout()
-            window.layoutIfNeeded()
+            backgroundView.setNeedsLayout()
+            backgroundView.layoutIfNeeded()
             
             destinationConstraintClosure(popView)
             
             UIView.animate(withDuration: animationProperty.duration,
                            delay: 0,
                            options: animationProperty.options) {
-                window.setNeedsLayout()
-                window.layoutIfNeeded()
+                backgroundView.setNeedsLayout()
+                backgroundView.layoutIfNeeded()
                 
-                contentView.backgroundColor = Popup.defaultDimmedMaskColor.withAlphaComponent(dimmedMaskAlpha)
+                dimmedView.backgroundColor = Popup.defaultDimmedMaskColor.withAlphaComponent(dimmedMaskAlpha)
             } completion: { _ in
                 completion?()
             }
         } else {
-            contentView.backgroundColor = Popup.defaultDimmedMaskColor.withAlphaComponent(dimmedMaskAlpha)
+            dimmedView.backgroundColor = Popup.defaultDimmedMaskColor.withAlphaComponent(dimmedMaskAlpha)
             
             dismissConstraintClosure(popView)
             
@@ -110,32 +198,44 @@ extension Popup {
         let info = Info(groupKey: groupKey,
                         mainPopView: popView,
                         backgroundView: backgroundView,
-                        contentView: contentView)
+                        dimmedView: dimmedView,
+                        gestureView: gestureView)
         
-        window.append(info)
+        rootView.append(info)
     }
     
-    
-    public static func updateDestination(popView: UIView,
-                                         animation: Bool = true,
+    public static func updateDestination(groupKey: String,
+                                         popView: UIView,
                                          animationProperty: AnimationProperty = .default,
                                          destinationConstraintClosure: @escaping PopViewConstraintClosure,
                                          completion: (() -> Void)? = nil) {
-        guard let window = Popup.getWindow() else { return }
-        
+        guard let rootView = Popup.getRootViewController()?.view else { return }
+        guard let info = rootView.getInfo(with: groupKey) else { return }
+        guard let superView = popView.superview else { return } // backgroundView
         guard let popupPosition = popView.popupPosition else { return }
         
-        window.setNeedsLayout()
-        window.layoutIfNeeded()
+        var find = false
+        for view in info.allPopViews {
+            if view.identifier == popView.identifier {
+                find = true
+                break
+            }
+        }
+        if !find {
+            return
+        }
         
-        if animation {
+        superView.setNeedsLayout()
+        superView.layoutIfNeeded()
+        
+        if animationProperty.animation {
             destinationConstraintClosure(popView)
             
             UIView.animate(withDuration: animationProperty.duration,
                            delay: 0,
                            options: animationProperty.options) {
-                window.setNeedsLayout()
-                window.layoutIfNeeded()
+                superView.setNeedsLayout()
+                superView.layoutIfNeeded()
             } completion: { _ in
                 completion?()
             }
@@ -150,12 +250,27 @@ extension Popup {
         
     }
     
-    public static func updateDismiss(popView: UIView, dismissConstraintClosure: @escaping PopViewConstraintClosure) {
-        guard let window = Popup.getWindow() else { return }
+    public static func updateDismiss(groupKey: String,
+                                     popView: UIView,
+                                     dismissConstraintClosure: @escaping PopViewConstraintClosure) {
+        guard let rootView = Popup.getRootViewController()?.view else { return }
+        guard let info = rootView.getInfo(with: groupKey) else { return }
+        guard let superView = popView.superview else { return }
         guard let popupPosition = popView.popupPosition else { return }
         
-        window.setNeedsLayout()
-        window.layoutIfNeeded()
+        var find = false
+        for view in info.allPopViews {
+            if view.identifier == popView.identifier {
+                find = true
+                break
+            }
+        }
+        if !find {
+            return
+        }
+        
+        superView.setNeedsLayout()
+        superView.layoutIfNeeded()
         
         popupPosition.dismissConstraintClosure = dismissConstraintClosure
         popView.popupPosition = popupPosition
@@ -163,35 +278,31 @@ extension Popup {
     
     public static func insert(groupKey: String,
                               popView: UIView,
-                              animation: Bool = true,
                               animationProperty: AnimationProperty = .default,
                               initialConstraintClosure: @escaping PopViewConstraintClosure,
                               destinationConstraintClosure: @escaping PopViewConstraintClosure,
                               dismissConstraintClosure: @escaping PopViewConstraintClosure,
                               completion: (() -> Void)? = nil) {
-        
-        guard let window = Popup.getWindow() else { return }
+        guard let rootView = Popup.getRootViewController()?.view else { return }
+        guard let info = rootView.getInfo(with: groupKey) else { return }
         
         // add popView
-        window.addSubview(popView)
-        
-        window.setNeedsLayout()
-        window.layoutIfNeeded()
+        info.backgroundView.addSubview(popView)
         
         //
-        if animation {
+        if animationProperty.animation {
             initialConstraintClosure(popView)
             
-            window.setNeedsLayout()
-            window.layoutIfNeeded()
+            info.backgroundView.setNeedsLayout()
+            info.backgroundView.layoutIfNeeded()
             
             destinationConstraintClosure(popView)
             
             UIView.animate(withDuration: animationProperty.duration,
                            delay: 0,
                            options: animationProperty.options) {
-                window.setNeedsLayout()
-                window.layoutIfNeeded()
+                info.backgroundView.setNeedsLayout()
+                info.backgroundView.layoutIfNeeded()
             } completion: { _ in
                 completion?()
             }
@@ -205,30 +316,30 @@ extension Popup {
                                         dismissConstraintClosure: dismissConstraintClosure)
         popView.popupPosition = viewPosition
         
-        window.add(with: groupKey, otherPopView: popView)
+        rootView.add(with: groupKey, otherPopView: popView)
     }
     
     
     public static func dismiss(groupKey: String,
-                               animation: Bool = true,
                                animationProperty: AnimationProperty = .default,
                                completion: (() -> Void)? = nil) {
-        guard let window = Popup.getWindow() else { return }
-        guard let info = window.getInfo(with: groupKey) else { return }
+        guard let rootView = Popup.getRootViewController()?.view else { return }
+        guard let info = rootView.getInfo(with: groupKey) else { return }
         
         func clear() {
             for popView in info.allPopViews {
                 popView.removeFromSuperview()
             }
-            info.contentView.removeFromSuperview()
+            info.gestureView.removeFromSuperview()
+            info.dimmedView.removeFromSuperview()
             info.backgroundView.removeFromSuperview()
-            window.remove(with: groupKey)
+            rootView.remove(with: groupKey)
         }
         
-        window.setNeedsLayout()
-        window.layoutIfNeeded()
+        info.backgroundView.setNeedsLayout()
+        info.backgroundView.layoutIfNeeded()
         
-        if animation {
+        if animationProperty.animation {
             for popView in info.allPopViews {
                 let popupPosition = popView.popupPosition
                 popupPosition?.dismissConstraintClosure(popView)
@@ -236,9 +347,9 @@ extension Popup {
             UIView.animate(withDuration: animationProperty.duration,
                            delay: 0,
                            options: animationProperty.options) {
-                window.setNeedsLayout()
-                window.layoutIfNeeded()
-                info.contentView.backgroundColor = Popup.defaultDimmedMaskColor.withAlphaComponent(0)
+                info.backgroundView.setNeedsLayout()
+                info.backgroundView.layoutIfNeeded()
+                info.dimmedView.backgroundColor = Popup.defaultDimmedMaskColor.withAlphaComponent(0)
             } completion: { _ in
                 clear()
                 completion?()
@@ -248,9 +359,22 @@ extension Popup {
                 let popupPosition = popView.popupPosition
                 popupPosition?.dismissConstraintClosure(popView)
             }
-            info.contentView.backgroundColor = Popup.defaultDimmedMaskColor.withAlphaComponent(0)
+            info.dimmedView.backgroundColor = Popup.defaultDimmedMaskColor.withAlphaComponent(0)
             clear()
             completion?()
         }
+    }
+}
+
+extension Popup {
+    public static func getWindow() -> UIWindow? {
+        if let window = UIApplication.shared.delegate?.window {
+            return window
+        }
+        return nil
+    }
+    
+    public static func getRootViewController() -> UIViewController? {
+        return Popup.getWindow()?.rootViewController
     }
 }
