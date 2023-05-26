@@ -38,7 +38,8 @@ fileprivate final class PopView1: UIView {
     }
     
     @objc func btnAction() {
-        Popup.updateDestination(popView: self) { popView in
+        Popup.updateDestination(groupKey: groupKey,
+                                popView: self) { popView in
             let size = popView.frame.size // you can get size
             popView.snp.remakeConstraints { make in
                 make.left.equalToSuperview().offset(20)
@@ -46,7 +47,8 @@ fileprivate final class PopView1: UIView {
                 make.size.equalTo(size)
             }
         }
-        Popup.updateDismiss(popView: self) { popView in
+        Popup.updateDismiss(groupKey: groupKey,
+                            popView: self) { popView in
             let size = popView.frame.size // you can get size
             popView.snp.remakeConstraints { make in
                 make.left.equalToSuperview().offset(20)
@@ -129,3 +131,5 @@ public final class MultiAction: ModelAction {
         }
     }
 }
+
+

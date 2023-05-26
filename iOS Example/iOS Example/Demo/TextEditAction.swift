@@ -18,6 +18,7 @@ fileprivate final class PopView1: UIView {
         let t = UITextField()
         t.layer.borderWidth = 2.0
         t.layer.borderColor = UIColor.red.cgColor
+        t.placeholder = "说点什么吧"
         return t
     }()
     
@@ -25,6 +26,7 @@ fileprivate final class PopView1: UIView {
         let t = UITextField()
         t.layer.borderWidth = 2.0
         t.layer.borderColor = UIColor.orange.cgColor
+        t.placeholder = "说点什么吧"
         return t
     }()
     

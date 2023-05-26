@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public final class BackgroundTouchConfiguration {
     public let enable: Bool
     public let animationProperty: AnimationProperty
