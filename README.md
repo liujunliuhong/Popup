@@ -29,7 +29,7 @@ Various pop-up windows are often used in projects, so I encapsulated a small fun
 ##### CocoaPods
 
 ```ruby
-pod 'DragCardContainer'
+pod 'Popup'
 ```
 
 Or
