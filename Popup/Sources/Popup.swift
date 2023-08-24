@@ -357,7 +357,7 @@ extension Popup {
     }
     
     private static func getRootView() -> UIView? {
-        // return Popup.getWindow()
-        return Popup.getRootViewController()?.view
+        return Popup.getWindow()
+        //return Popup.getRootViewController()?.view
     }
 }
