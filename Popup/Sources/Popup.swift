@@ -89,7 +89,9 @@ extension Popup {
             destinationConstraintClosure(popView)
             
             UIView.animate(withDuration: animationProperty.duration,
-                           delay: 0,
+                           delay: animationProperty.delay,
+                           usingSpringWithDamping: animationProperty.usingSpringWithDamping,
+                           initialSpringVelocity: animationProperty.initialSpringVelocity,
                            options: animationProperty.options) {
                 backgroundView.setNeedsLayout()
                 backgroundView.layoutIfNeeded()
@@ -155,7 +157,9 @@ extension Popup {
             destinationConstraintClosure(popView)
             
             UIView.animate(withDuration: animationProperty.duration,
-                           delay: 0,
+                           delay: animationProperty.delay,
+                           usingSpringWithDamping: animationProperty.usingSpringWithDamping,
+                           initialSpringVelocity: animationProperty.initialSpringVelocity,
                            options: animationProperty.options) {
                 backgroundView.setNeedsLayout()
                 backgroundView.layoutIfNeeded()
@@ -236,7 +240,9 @@ extension Popup {
             destinationConstraintClosure(popView)
             
             UIView.animate(withDuration: animationProperty.duration,
-                           delay: 0,
+                           delay: animationProperty.delay,
+                           usingSpringWithDamping: animationProperty.usingSpringWithDamping,
+                           initialSpringVelocity: animationProperty.initialSpringVelocity,
                            options: animationProperty.options) {
                 info.backgroundView.setNeedsLayout()
                 info.backgroundView.layoutIfNeeded()
@@ -286,7 +292,9 @@ extension Popup {
                 popupPosition?.dismissConstraintClosure(popView)
             }
             UIView.animate(withDuration: animationProperty.duration,
-                           delay: 0,
+                           delay: animationProperty.delay,
+                           usingSpringWithDamping: animationProperty.usingSpringWithDamping,
+                           initialSpringVelocity: animationProperty.initialSpringVelocity,
                            options: animationProperty.options) {
                 info.backgroundView.setNeedsLayout()
                 info.backgroundView.layoutIfNeeded()
