@@ -19,7 +19,7 @@ public struct AnimationProperty {
     public init(animation: Bool,
                 duration: TimeInterval = Popup.defaultAnimationDuration,
                 delay: TimeInterval = 0,
-                usingSpringWithDamping: CGFloat = 0,
+                usingSpringWithDamping: CGFloat = 1.0,
                 initialSpringVelocity: CGFloat = 0,
                 options: UIView.AnimationOptions = Popup.defaultAnimationOptions) {
         self.animation = animation
