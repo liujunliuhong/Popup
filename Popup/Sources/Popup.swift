@@ -33,6 +33,7 @@ extension Popup {
     public static func show(groupKey: String,
                             popView: UIView,
                             dimmedMaskAlpha: CGFloat = Popup.defaultDimmedMaskAlpha,
+                            dimmedMaskColor: UIColor = Popup.defaultDimmedMaskColor,
                             animationProperty: AnimationProperty = .default,
                             backgroundTouchConfiguration: BackgroundTouchConfiguration = .default,
                             initialConstraintClosure: @escaping PopViewConstraintClosure,
@@ -79,7 +80,7 @@ extension Popup {
         
         //
         if animationProperty.animation {
-            dimmedView.backgroundColor = Popup.defaultDimmedMaskColor.withAlphaComponent(0)
+            dimmedView.backgroundColor = dimmedMaskColor.withAlphaComponent(0)
             
             initialConstraintClosure(popView)
             
@@ -96,12 +97,12 @@ extension Popup {
                 backgroundView.setNeedsLayout()
                 backgroundView.layoutIfNeeded()
                 
-                dimmedView.backgroundColor = Popup.defaultDimmedMaskColor.withAlphaComponent(dimmedMaskAlpha)
+                dimmedView.backgroundColor = dimmedMaskColor.withAlphaComponent(dimmedMaskAlpha)
             } completion: { _ in
                 completion?()
             }
         } else {
-            dimmedView.backgroundColor = Popup.defaultDimmedMaskColor.withAlphaComponent(dimmedMaskAlpha)
+            dimmedView.backgroundColor = dimmedMaskColor.withAlphaComponent(dimmedMaskAlpha)
             
             dismissConstraintClosure(popView)
             
@@ -117,6 +118,7 @@ extension Popup {
                         mainPopView: popView,
                         backgroundView: backgroundView,
                         dimmedView: dimmedView,
+                        dimmedMaskColor: dimmedMaskColor,
                         gestureView: gestureView)
         
         rootView.append(info)
@@ -298,7 +300,7 @@ extension Popup {
                            options: animationProperty.options) {
                 info.backgroundView.setNeedsLayout()
                 info.backgroundView.layoutIfNeeded()
-                info.dimmedView.backgroundColor = Popup.defaultDimmedMaskColor.withAlphaComponent(0)
+                info.dimmedView.backgroundColor = info.dimmedMaskColor.withAlphaComponent(0)
             } completion: { _ in
                 clear()
                 completion?()
@@ -308,7 +310,7 @@ extension Popup {
                 let popupPosition = popView.popupPosition
                 popupPosition?.dismissConstraintClosure(popView)
             }
-            info.dimmedView.backgroundColor = Popup.defaultDimmedMaskColor.withAlphaComponent(0)
+            info.dimmedView.backgroundColor = info.dimmedMaskColor.withAlphaComponent(0)
             clear()
             completion?()
         }

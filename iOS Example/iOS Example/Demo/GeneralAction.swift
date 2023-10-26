@@ -40,6 +40,7 @@ public final class GeneralAction: ModelAction {
         
         Popup.show(groupKey: groupKey,
                    popView: popView,
+                   dimmedMaskColor: .orange,
                    animationProperty: .init(animation: true, options: [.curveLinear]),
                    backgroundTouchConfiguration: backgroundTouchConfiguration) { popView in
             popView.snp.remakeConstraints { make in

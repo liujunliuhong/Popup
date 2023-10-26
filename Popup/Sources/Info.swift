@@ -15,6 +15,7 @@ internal final class Info {
     
     internal let backgroundView: UIView
     internal let dimmedView: UIView
+    internal let dimmedMaskColor: UIColor
     internal let gestureView: GestureView
     
     internal var otherPopViews: [UIView] = []
@@ -30,11 +31,13 @@ internal final class Info {
                   mainPopView: UIView,
                   backgroundView: UIView,
                   dimmedView: UIView,
+                  dimmedMaskColor: UIColor,
                   gestureView: GestureView) {
         self.groupKey = groupKey
         self.mainPopView = mainPopView
         self.backgroundView = backgroundView
         self.dimmedView = dimmedView
+        self.dimmedMaskColor = dimmedMaskColor
         self.gestureView = gestureView
     }
 }
