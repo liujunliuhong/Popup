@@ -41,7 +41,10 @@ extension Popup {
                             dismissConstraintClosure: @escaping PopViewConstraintClosure,
                             completion: (() -> Void)? = nil) {
         
-        guard let rootView = Popup.getRootView() else { return }
+        guard let rootView = Popup.getRootView() else {
+            completion?()
+            return
+        }
         
         // backgroundView
         let backgroundView = BackgroundView()
@@ -136,10 +139,23 @@ extension Popup {
                                          animationProperty: AnimationProperty = .default,
                                          destinationConstraintClosure: @escaping PopViewConstraintClosure,
                                          completion: (() -> Void)? = nil) {
-        guard let rootView = Popup.getRootView() else { return }
-        guard let info = rootView.getInfo(with: groupKey) else { return }
-        guard let backgroundView = popView.superview as? BackgroundView else { return } // backgroundView
-        guard let popupPosition = popView.popupPosition else { return }
+        guard let rootView = Popup.getRootView() else {
+            completion?()
+            return
+        }
+        guard let info = rootView.getInfo(with: groupKey) else {
+            completion?()
+            return
+        }
+        guard let backgroundView = popView.superview as? BackgroundView else {
+            completion?()
+            return
+        } // backgroundView
+        
+        guard let popupPosition = popView.popupPosition else {
+            completion?()
+            return
+        }
         
         var find = false
         for view in info.allPopViews {
@@ -149,6 +165,7 @@ extension Popup {
             }
         }
         if !find {
+            completion?()
             return
         }
         
@@ -226,8 +243,14 @@ extension Popup {
                               destinationConstraintClosure: @escaping PopViewConstraintClosure,
                               dismissConstraintClosure: @escaping PopViewConstraintClosure,
                               completion: (() -> Void)? = nil) {
-        guard let rootView = Popup.getRootView() else { return }
-        guard let info = rootView.getInfo(with: groupKey) else { return }
+        guard let rootView = Popup.getRootView() else {
+            completion?()
+            return
+        }
+        guard let info = rootView.getInfo(with: groupKey) else {
+            completion?()
+            return
+        }
         
         // add popView
         info.backgroundView.addSubview(popView)
@@ -272,8 +295,14 @@ extension Popup {
     public static func dismiss(groupKey: String,
                                animationProperty: AnimationProperty = .default,
                                completion: (() -> Void)? = nil) {
-        guard let rootView = Popup.getRootView() else { return }
-        guard let info = rootView.getInfo(with: groupKey) else { return }
+        guard let rootView = Popup.getRootView() else {
+            completion?()
+            return
+        }
+        guard let info = rootView.getInfo(with: groupKey) else {
+            completion?()
+            return
+        }
         
         func clear() {
             for popView in info.allPopViews {
