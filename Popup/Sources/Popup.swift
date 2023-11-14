@@ -107,7 +107,7 @@ extension Popup {
         } else {
             dimmedView.backgroundColor = dimmedMaskColor.withAlphaComponent(dimmedMaskAlpha)
             
-            dismissConstraintClosure(popView)
+            destinationConstraintClosure(popView)
             
             completion?()
         }
