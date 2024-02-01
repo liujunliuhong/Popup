@@ -18,6 +18,17 @@ public final class Popup {
 }
 
 extension Popup {
+    /// 某个key是否已经存在
+    public static func isExist(groupKey: String) -> Bool {
+        guard let rootView = Popup.getRootView() else {
+            return false
+        }
+        guard let info = rootView.getInfo(with: groupKey) else {
+            return false
+        }
+        return true
+    }
+    
     
     /// Show a popView
     /// - Parameters:
