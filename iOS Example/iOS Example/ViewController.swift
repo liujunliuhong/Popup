@@ -58,9 +58,8 @@ public final class ViewController: UIViewController {
         
         let model1 = Model(title: "General", action: GeneralAction())
         let model2 = Model(title: "TextEdit", action: TextEditAction())
-        let model3 = Model(title: "Multi", action: MultiAction())
         
-        models = [model1, model2, model3]
+        models = [model1, model2]
         
         tableView.reloadData()
     }

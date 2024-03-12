@@ -9,32 +9,24 @@ import Foundation
 import UIKit
 
 internal final class Info {
-    internal let groupKey: String
     
-    internal let mainPopView: UIView
+    internal let containerView: UIView
+    
+    internal let popView: UIView
     
     internal let backgroundView: UIView
     internal let dimmedView: UIView
     internal let dimmedMaskColor: UIColor
     internal let gestureView: GestureView
     
-    internal var otherPopViews: [UIView] = []
-    
-    internal var allPopViews: [UIView] {
-        var popViews: [UIView] = []
-        popViews.append(mainPopView)
-        popViews.append(contentsOf: otherPopViews)
-        return popViews
-    }
-    
-    internal init(groupKey: String,
-                  mainPopView: UIView,
+    internal init(containerView: UIView,
+                  popView: UIView,
                   backgroundView: UIView,
                   dimmedView: UIView,
                   dimmedMaskColor: UIColor,
                   gestureView: GestureView) {
-        self.groupKey = groupKey
-        self.mainPopView = mainPopView
+        self.containerView = containerView
+        self.popView = popView
         self.backgroundView = backgroundView
         self.dimmedView = dimmedView
         self.dimmedMaskColor = dimmedMaskColor

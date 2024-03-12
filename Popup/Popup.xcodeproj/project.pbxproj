@@ -15,6 +15,7 @@
 		D13F341E2A1EFBEF007637AA /* BackgroundTouchConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13F341D2A1EFBEF007637AA /* BackgroundTouchConfiguration.swift */; };
 		D19B941D2A1B3D5200FC46DD /* Popup.h in Headers */ = {isa = PBXBuildFile; fileRef = D19B941C2A1B3D5200FC46DD /* Popup.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D19B942C2A1B402B00FC46DD /* Popup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19B942B2A1B402B00FC46DD /* Popup.swift */; };
+		D1D1FA3E2BA020A500976B18 /* UIView+Popup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D1FA3D2BA020A500976B18 /* UIView+Popup.swift */; };
 		FA7FD2831C69C4757AFBDA86 /* libPods-Popup.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 13F1D2DE92D1EBDE84301F88 /* libPods-Popup.a */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +32,7 @@
 		D19B94192A1B3D5200FC46DD /* Popup.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Popup.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D19B941C2A1B3D5200FC46DD /* Popup.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Popup.h; sourceTree = "<group>"; };
 		D19B942B2A1B402B00FC46DD /* Popup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Popup.swift; sourceTree = "<group>"; };
+		D1D1FA3D2BA020A500976B18 /* UIView+Popup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Popup.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				D19B942B2A1B402B00FC46DD /* Popup.swift */,
+				D1D1FA3D2BA020A500976B18 /* UIView+Popup.swift */,
 				D13928732A1DF291008652C7 /* UIView+Extension.swift */,
 				D13928692A1DDE0F008652C7 /* Info.swift */,
 				D13928862A1E1311008652C7 /* AnimationProperty.swift */,
@@ -215,6 +218,7 @@
 				D136E5402A20803000125478 /* View.swift in Sources */,
 				D13928742A1DF291008652C7 /* UIView+Extension.swift in Sources */,
 				D139286A2A1DDE0F008652C7 /* Info.swift in Sources */,
+				D1D1FA3E2BA020A500976B18 /* UIView+Popup.swift in Sources */,
 				D19B942C2A1B402B00FC46DD /* Popup.swift in Sources */,
 				D13928782A1DF436008652C7 /* ViewPosition.swift in Sources */,
 			);

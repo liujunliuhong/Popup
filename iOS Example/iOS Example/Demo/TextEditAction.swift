@@ -65,10 +65,10 @@ public final class TextEditAction: ModelAction {
             print("Background Touch Dismiss")
         }
         
-        Popup.show(groupKey: groupKey,
-                   popView: popView,
-                   animationProperty: .init(animation: true, options: [.curveLinear]),
-                   backgroundTouchConfiguration: backgroundTouchConfiguration) { popView in
+        popView.popup.show(on: UIApplication.shared.keyWindow!,
+                           dimmedMaskColor: .orange,
+                           animationProperty: .init(animation: true, options: [.curveLinear]),
+                           backgroundTouchConfiguration: backgroundTouchConfiguration) { popView in
             popView.snp.remakeConstraints { make in
                 make.centerX.equalToSuperview()
                 make.top.equalToSuperview { $0.snp.bottom }

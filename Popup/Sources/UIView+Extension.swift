@@ -9,9 +9,20 @@ import Foundation
 import UIKit
 import ObjectiveC
 
+private var idKey = "com.galaxy.popup.idKey"
+extension UIView {
+    internal var key: String? {
+        get {
+            return objc_getAssociatedObject(self, &idKey) as? String
+        }
+        set {
+            objc_setAssociatedObject(self, &idKey, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
+        }
+    }
+}
+
 private var popupPositionKey = "com.galaxy.popup.popupPositionKey"
 extension UIView {
-    
     internal var popupPosition: ViewPosition? {
         get {
             return objc_getAssociatedObject(self, &popupPositionKey) as? ViewPosition
@@ -55,41 +66,26 @@ extension UIView {
         return infos
     }
     
-    internal func append(_ info: Info) {
+    internal func add(_ info: Info) {
         var infos = self.infos
         infos.append(info)
         self.infos = infos
     }
     
-    internal func getInfo(with groupKey: String) -> Info? {
+    internal func getInfo(with key: String) -> Info? {
         let infos = self.infos
         for info in infos {
-            if info.groupKey == groupKey {
+            if info.popView.key == key {
                 return info
             }
         }
         return nil
     }
     
-    internal func add(with groupKey: String, otherPopView: UIView) {
-        var hasChange: Bool = false
-        let infos = self.infos
-        for info in infos {
-            if info.groupKey == groupKey {
-                info.otherPopViews.append(otherPopView)
-                hasChange = true
-                break
-            }
-        }
-        if hasChange {
-            self.infos = infos
-        }
-    }
-    
-    internal func remove(with groupKey: String) {
+    internal func remove(with key: String) {
         var infos = self.infos
         for (i, info) in infos.enumerated() {
-            if info.groupKey == groupKey {
+            if info.popView.key == key {
                 infos.remove(at: i)
                 self.infos = infos
                 break
