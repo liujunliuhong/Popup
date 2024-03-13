@@ -10,26 +10,33 @@ import UIKit
 
 internal final class Info {
     
-    internal let containerView: UIView
+    internal let key: String
     
-    internal let popView: UIView
+    internal weak var containerView: UIView?
+    internal weak var popView: UIView?
     
     internal let backgroundView: UIView
     internal let dimmedView: UIView
     internal let dimmedMaskColor: UIColor
     internal let gestureView: GestureView
     
-    internal init(containerView: UIView,
+    internal let position: ViewPosition
+    
+    internal init(key: String,
+                  containerView: UIView,
                   popView: UIView,
                   backgroundView: UIView,
                   dimmedView: UIView,
                   dimmedMaskColor: UIColor,
-                  gestureView: GestureView) {
+                  gestureView: GestureView,
+                  position: ViewPosition) {
+        self.key = key
         self.containerView = containerView
         self.popView = popView
         self.backgroundView = backgroundView
         self.dimmedView = dimmedView
         self.dimmedMaskColor = dimmedMaskColor
         self.gestureView = gestureView
+        self.position = position
     }
 }

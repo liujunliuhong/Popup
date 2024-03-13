@@ -24,7 +24,9 @@ fileprivate final class PopView1: UIView {
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
+        Popup.dismiss(key: groupKey, containerType: .window) {
+            
+        }
     }
 }
 
@@ -38,10 +40,7 @@ public final class GeneralAction: ModelAction {
             print("Background Touch Dismiss")
         }
         
-        popView.popup.show(on: UIApplication.shared.keyWindow!,
-                           dimmedMaskColor: .orange,
-                           animationProperty: .init(animation: true, options: [.curveLinear]),
-                           backgroundTouchConfiguration: backgroundTouchConfiguration) { popView in
+        Popup.show(key: groupKey, containerType: .window, popView: popView, backgroundTouchConfiguration: backgroundTouchConfiguration) { popView in
             popView.snp.remakeConstraints { make in
                 make.centerX.equalToSuperview()
                 make.top.equalToSuperview { $0.snp.bottom }

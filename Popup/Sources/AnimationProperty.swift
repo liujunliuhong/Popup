@@ -17,11 +17,11 @@ public struct AnimationProperty {
     public let options: UIView.AnimationOptions
     
     public init(animation: Bool,
-                duration: TimeInterval = Popup.defaultAnimationDuration,
+                duration: TimeInterval = PopupConstant.defaultAnimationDuration,
                 delay: TimeInterval = 0,
                 usingSpringWithDamping: CGFloat = 1.0,
                 initialSpringVelocity: CGFloat = 0,
-                options: UIView.AnimationOptions = Popup.defaultAnimationOptions) {
+                options: UIView.AnimationOptions = PopupConstant.defaultAnimationOptions) {
         self.animation = animation
         self.duration = duration
         self.delay = delay

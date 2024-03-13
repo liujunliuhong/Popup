@@ -10,18 +10,15 @@ import UIKit
 
 extension PopupWrapper where Base: UIView {
     public func show(on containerView: UIView,
-                     dimmedMaskAlpha: CGFloat = Popup.defaultDimmedMaskAlpha,
-                     dimmedMaskColor: UIColor = Popup.defaultDimmedMaskColor,
+                     key: String = UUID().uuidString,
+                     dimmedMaskAlpha: CGFloat = PopupConstant.defaultDimmedMaskAlpha,
+                     dimmedMaskColor: UIColor = PopupConstant.defaultDimmedMaskColor,
                      animationProperty: AnimationProperty = .default,
                      backgroundTouchConfiguration: BackgroundTouchConfiguration = .default,
                      initialConstraintClosure: @escaping PopViewConstraintClosure,
                      destinationConstraintClosure: @escaping PopViewConstraintClosure,
                      dismissConstraintClosure: @escaping PopViewConstraintClosure,
                      completion: (() -> Void)? = nil) {
-        
-        let key = UUID().uuidString
-        base.key = key
-        
         // backgroundView
         let backgroundView = BackgroundView()
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
@@ -94,53 +91,44 @@ extension PopupWrapper where Base: UIView {
         let viewPosition = ViewPosition(initialConstraintClosure: initialConstraintClosure,
                                         destinationConstraintClosure: destinationConstraintClosure,
                                         dismissConstraintClosure: dismissConstraintClosure)
-        base.popupPosition = viewPosition
         
         
-        let info = Info(containerView: containerView,
+        let info = Info(key: key,
+                        containerView: containerView,
                         popView: base,
                         backgroundView: backgroundView,
                         dimmedView: dimmedView,
                         dimmedMaskColor: dimmedMaskColor,
-                        gestureView: gestureView)
+                        gestureView: gestureView,
+                        position: viewPosition)
         
-        containerView.add(info)
+        base.info = info
+        
+        containerView.add(info: info)
     }
     
     public func dismiss(animationProperty: AnimationProperty = .default,
                         completion: (() -> Void)? = nil) {
         
-        guard let key = base.key else {
-            completion?()
-            return
-        }
-        
-        guard let containerView = base.superview else {
-            completion?()
-            return
-        }
-        
-        guard let info = containerView.getInfo(with: key) else {
+        guard let info = base.info else {
             completion?()
             return
         }
         
         func clear() {
-            info.popView.removeFromSuperview()
             info.gestureView.removeFromSuperview()
             info.dimmedView.removeFromSuperview()
             info.backgroundView.removeFromSuperview()
-            containerView.remove(with: key)
+            info.containerView?.removeInfo(key: info.key)
+            base.info = nil
+            base.removeFromSuperview()
         }
         
         info.backgroundView.setNeedsLayout()
         info.backgroundView.layoutIfNeeded()
         
-        let popupPosition = info.popView.popupPosition
-        
         if animationProperty.animation {
-            
-            popupPosition?.dismissConstraintClosure(base)
+            info.position.dismissConstraintClosure(base)
             
             UIView.animate(withDuration: animationProperty.duration,
                            delay: animationProperty.delay,
@@ -155,7 +143,7 @@ extension PopupWrapper where Base: UIView {
                 completion?()
             }
         } else {
-            popupPosition?.dismissConstraintClosure(base)
+            info.position.dismissConstraintClosure(base)
             info.dimmedView.backgroundColor = info.dimmedMaskColor.withAlphaComponent(0)
             clear()
             completion?()
@@ -165,30 +153,15 @@ extension PopupWrapper where Base: UIView {
     public func updateDestination(animationProperty: AnimationProperty = .default,
                                   destinationConstraintClosure: @escaping PopViewConstraintClosure,
                                   completion: (() -> Void)? = nil) {
-        guard let key = base.key else {
+        
+        
+        guard let info = base.info else {
             completion?()
             return
         }
         
-        guard let containerView = base.superview else {
-            completion?()
-            return
-        }
+        let backgroundView = info.backgroundView
         
-        guard let info = containerView.getInfo(with: key) else {
-            completion?()
-            return
-        }
-        
-        guard let backgroundView = base.superview as? BackgroundView else {
-            completion?()
-            return
-        } // backgroundView
-        
-        guard let popupPosition = base.popupPosition else {
-            completion?()
-            return
-        }
         
         backgroundView.setNeedsLayout()
         backgroundView.layoutIfNeeded()
@@ -211,39 +184,19 @@ extension PopupWrapper where Base: UIView {
             completion?()
         }
         
-        popupPosition.destinationConstraintClosure = destinationConstraintClosure
+        info.position.destinationConstraintClosure = destinationConstraintClosure
         
-        base.popupPosition = popupPosition
-        
+        base.info = info
     }
     
     public func updateDismiss(dismissConstraintClosure: @escaping PopViewConstraintClosure) {
         
-        guard let key = base.key else {
+        guard let info = base.info else {
             return
         }
         
-        guard let containerView = base.superview else {
-            return
-        }
-        
-        guard let info = containerView.getInfo(with: key) else {
-            return
-        }
-        
-        guard let backgroundView = base.superview as? BackgroundView else {
-            return
-        } // backgroundView
-        
-        guard let popupPosition = base.popupPosition else {
-            return
-        }
-        
-        backgroundView.setNeedsLayout()
-        backgroundView.layoutIfNeeded()
-        
-        popupPosition.dismissConstraintClosure = dismissConstraintClosure
-        base.popupPosition = popupPosition
+        info.position.dismissConstraintClosure = dismissConstraintClosure
+        base.info = info
     }
 }
 
