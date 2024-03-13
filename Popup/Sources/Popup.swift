@@ -36,6 +36,16 @@ public final class Popup {
 }
 
 extension Popup {
+    public static func isExist(key: String,
+                               containerType: Popup.ContainerType,
+                               popView: UIView) -> Bool {
+        guard let containerView = Popup.getContainerView(containerType: containerType) else {
+            return false
+        }
+        let info = containerView.getInfo(key: key)        
+        return info != nil
+    }
+    
     public static func show(key: String,
                             containerType: Popup.ContainerType,
                             popView: UIView,
