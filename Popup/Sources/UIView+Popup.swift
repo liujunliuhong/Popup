@@ -77,11 +77,16 @@ extension PopupWrapper where Base: UIView {
                 backgroundView.layoutIfNeeded()
                 
                 dimmedView.backgroundColor = dimmedMaskColor.withAlphaComponent(dimmedMaskAlpha)
+                
+                animationProperty.viewAnimationClosure?()
+                
             } completion: { _ in
                 completion?()
             }
         } else {
             dimmedView.backgroundColor = dimmedMaskColor.withAlphaComponent(dimmedMaskAlpha)
+            
+            animationProperty.viewAnimationClosure?()
             
             destinationConstraintClosure(base)
             
@@ -138,6 +143,9 @@ extension PopupWrapper where Base: UIView {
                 info.backgroundView.setNeedsLayout()
                 info.backgroundView.layoutIfNeeded()
                 info.dimmedView.backgroundColor = info.dimmedMaskColor.withAlphaComponent(0)
+                
+                animationProperty.viewAnimationClosure?()
+                
             } completion: { _ in
                 clear()
                 completion?()
@@ -145,6 +153,7 @@ extension PopupWrapper where Base: UIView {
         } else {
             info.position.dismissConstraintClosure(base)
             info.dimmedView.backgroundColor = info.dimmedMaskColor.withAlphaComponent(0)
+            animationProperty.viewAnimationClosure?()
             clear()
             completion?()
         }

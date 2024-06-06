@@ -16,6 +16,8 @@ public struct AnimationProperty {
     public let initialSpringVelocity: CGFloat
     public let options: UIView.AnimationOptions
     
+    public var viewAnimationClosure: (() -> Void)?
+    
     public init(animation: Bool,
                 duration: TimeInterval = PopupConstant.defaultAnimationDuration,
                 delay: TimeInterval = 0,
