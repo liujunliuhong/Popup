@@ -2,12 +2,7 @@
 platform :ios, '11.0'
 workspace 'iOS Example.xcworkspace'
 
-if File::exists?("../Popup")
-target 'Popup' do
-  project '../Popup/Popup.xcodeproj'
-  # pod 'SnapKit'
-end
-end
+
 
 target 'iOS Example' do
   use_frameworks!

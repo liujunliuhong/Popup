@@ -11,6 +11,7 @@ import UIKit
 extension PopupWrapper where Base: UIView {
     public func show(on containerView: UIView,
                      key: String = UUID().uuidString,
+                     visualEffectView: UIVisualEffectView?,
                      dimmedMaskAlpha: CGFloat = PopupConstant.defaultDimmedMaskAlpha,
                      dimmedMaskColor: UIColor = PopupConstant.defaultDimmedMaskColor,
                      animationProperty: AnimationProperty = .default,
@@ -33,6 +34,12 @@ extension PopupWrapper where Base: UIView {
         dimmedView.translatesAutoresizingMaskIntoConstraints = false
         backgroundView.addSubview(dimmedView)
         setFullScreenConstraints(with: dimmedView, superView: backgroundView)
+        
+        if let visualEffectView = visualEffectView {
+            visualEffectView.translatesAutoresizingMaskIntoConstraints = false
+            backgroundView.addSubview(visualEffectView)
+            setFullScreenConstraints(with: visualEffectView, superView: backgroundView)
+        }
         
         // gestureView
         let gestureView = GestureView()
@@ -121,8 +128,11 @@ extension PopupWrapper where Base: UIView {
         }
         
         func clear() {
-            info.gestureView.removeFromSuperview()
-            info.dimmedView.removeFromSuperview()
+            for view in info.backgroundView.subviews {
+                view.removeFromSuperview()
+            }
+//            info.gestureView.removeFromSuperview()
+//            info.dimmedView.removeFromSuperview()
             info.backgroundView.removeFromSuperview()
             info.containerView?.removeInfo(key: info.key)
             base.info = nil

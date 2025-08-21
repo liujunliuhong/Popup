@@ -48,6 +48,7 @@ extension Popup {
     public static func show(key: String,
                             containerType: Popup.ContainerType,
                             popView: UIView,
+                            visualEffectView: UIVisualEffectView?,
                             dimmedMaskAlpha: CGFloat = PopupConstant.defaultDimmedMaskAlpha,
                             dimmedMaskColor: UIColor = PopupConstant.defaultDimmedMaskColor,
                             animationProperty: AnimationProperty = .default,
@@ -63,6 +64,7 @@ extension Popup {
         
         popView.popup.show(on: containerView,
                            key: key,
+                           visualEffectView: visualEffectView,
                            dimmedMaskAlpha: dimmedMaskAlpha,
                            dimmedMaskColor: dimmedMaskColor,
                            animationProperty: animationProperty,
