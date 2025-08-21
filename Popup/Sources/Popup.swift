@@ -48,7 +48,7 @@ extension Popup {
     public static func show(key: String,
                             containerType: Popup.ContainerType,
                             popView: UIView,
-                            visualEffectView: UIVisualEffectView?,
+                            visualEffectView: UIVisualEffectView? = nil,
                             dimmedMaskAlpha: CGFloat = PopupConstant.defaultDimmedMaskAlpha,
                             dimmedMaskColor: UIColor = PopupConstant.defaultDimmedMaskColor,
                             animationProperty: AnimationProperty = .default,
